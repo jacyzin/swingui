@@ -11,6 +11,7 @@ public class MainFrame extends JFrame {
 	private TextPanel textPanel;
 	private JButton btn1;
 	private Toolbar toolbar;
+	private FormPanel formPanel;
 
 	public MainFrame() {
 		super("SwingUI 1");
@@ -19,6 +20,16 @@ public class MainFrame extends JFrame {
 		textPanel = new TextPanel();
 		toolbar = new Toolbar();
 		btn1 = new JButton("Click Me");
+		formPanel = new FormPanel();
+		
+		toolbar.setStringListener(new StringListener() {
+
+			@Override
+			public void textEmitted(String text) {
+				textPanel.append(text);
+			}
+			
+		});
 		
 		btn1.addActionListener(new ActionListener() {
 			
