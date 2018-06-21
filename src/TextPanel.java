@@ -3,10 +3,10 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.Border;
 
 public class TextPanel extends JPanel {
 
+	private static final long serialVersionUID = 1792006093469908506L;
 	private JTextArea textArea;
 
 	public TextPanel() {
