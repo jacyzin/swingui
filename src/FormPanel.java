@@ -1,18 +1,34 @@
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 public class FormPanel extends JPanel {
 
 	private static final long serialVersionUID = -1505265457916809810L;
+	private JLabel nameLabel;
+	private JLabel occupationLabel;
+	private JTextField nameField;
+	private JTextField occupationField;
+	private JButton okBtn;
+	
 	
 	public FormPanel() {
 		
 		Dimension dimension = getPreferredSize();
 		dimension.width = 250;
 		setPreferredSize(dimension);
+		
+		nameLabel = new JLabel("Name: ");
+		occupationLabel = new JLabel("Occupation: ");
+		nameField = new JTextField(10);
+		occupationField = new JTextField(10);
+		
+		okBtn = new JButton("OK");
 		
 		Border innerBorder = BorderFactory.createTitledBorder("Add Person");
 		Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
