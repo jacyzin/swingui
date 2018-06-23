@@ -14,7 +14,7 @@ public class MainFrame extends JFrame {
 	private FormPanel formPanel;
 
 	public MainFrame() {
-		super("SwingUI 1");
+		super("SwingUI");
 		setLayout(new BorderLayout());
 
 		textPanel = new TextPanel();
@@ -29,6 +29,15 @@ public class MainFrame extends JFrame {
 				textPanel.append(text);
 			}
 			
+		});
+		
+		formPanel.setFormListener(new FormListener() {
+			public void formEventOccurred(FormEvent e) {
+				String name = e.getName();
+				String occupation = e.getOccupation();
+				
+				textPanel.append(name + ": " + occupation + "\n");
+			}
 		});
 		
 		btn1.addActionListener(new ActionListener() {
