@@ -54,7 +54,7 @@ public class MainFrame extends JFrame {
 		add(formPanel, BorderLayout.WEST);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(600, 500);
+		setSize(800, 700);
 		setVisible(true);
 
 	}
