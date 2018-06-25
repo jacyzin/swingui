@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -29,6 +30,9 @@ public class FormPanel extends JPanel {
 	private JList ageList;
 	@SuppressWarnings("rawtypes")
 	private JComboBox empCombo;
+	private JCheckBox citizenCheck;
+	private JTextField taxField;
+	private JLabel taxLabel;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public FormPanel() {
@@ -43,6 +47,23 @@ public class FormPanel extends JPanel {
 		occupationField = new JTextField(10);
 		ageList = new JList();
 		empCombo = new JComboBox<>();
+		citizenCheck = new JCheckBox();
+		taxField = new JTextField(10);
+		taxLabel = new JLabel("Tax ID:");
+
+		// Set up tax ID
+		taxField.setEnabled(false);
+		taxLabel.setEnabled(false);
+
+		citizenCheck.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean isTicked = citizenCheck.isSelected();
+				taxLabel.setEnabled(isTicked);
+				taxField.setEnabled(isTicked);
+			}
+		});
 
 		// Set up list
 		DefaultListModel ageModel = new DefaultListModel();
@@ -74,10 +95,12 @@ public class FormPanel extends JPanel {
 				String occupation = occupationField.getText();
 				AgeCategory ageCat = (AgeCategory) ageList.getSelectedValue();
 				String empCat = (String) empCombo.getSelectedItem();
+				String taxId = taxField.getSelectedText();
+				boolean usCitizen = citizenCheck.isSelected();
 
 				System.out.println(empCat);
 
-				FormEvent ev = new FormEvent(this, name, occupation, ageCat.getId(), empCat);
+				FormEvent ev = new FormEvent(this, name, occupation, ageCat.getId(), empCat, taxId, usCitizen);
 
 				if (formListener != null) {
 					formListener.formEventOccurred(ev);
@@ -131,7 +154,7 @@ public class FormPanel extends JPanel {
 		gc.gridy++;
 		gc.weightx = 1;
 		gc.weighty = 0.2;
-		
+
 		gc.gridx = 0;
 		gc.anchor = GridBagConstraints.FIRST_LINE_END;
 		gc.insets = new Insets(0, 0, 0, 5);
@@ -146,7 +169,7 @@ public class FormPanel extends JPanel {
 		gc.gridy++;
 		gc.weightx = 1;
 		gc.weighty = 0.2;
-		
+
 		gc.gridx = 0;
 		gc.insets = new Insets(0, 0, 0, 0);
 		gc.anchor = GridBagConstraints.FIRST_LINE_END;
@@ -158,6 +181,36 @@ public class FormPanel extends JPanel {
 		add(empCombo, gc);
 
 		/////// fifth row /////////////////
+		gc.gridy++;
+		gc.weightx = 1;
+		gc.weighty = 0.2;
+
+		gc.gridx = 0;
+		gc.insets = new Insets(0, 0, 0, 0);
+		gc.anchor = GridBagConstraints.FIRST_LINE_END;
+		add(new JLabel("US Citizen: "), gc);
+
+		gc.gridx = 1;
+		gc.insets = new Insets(0, 0, 0, 0);
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
+		add(citizenCheck, gc);
+
+		/////// sixth row /////////////////
+		gc.gridy++;
+		gc.weightx = 1;
+		gc.weighty = 0.2;
+
+		gc.gridx = 0;
+		gc.insets = new Insets(0, 0, 0, 0);
+		gc.anchor = GridBagConstraints.FIRST_LINE_END;
+		add(new JLabel("Tax ID: "), gc);
+
+		gc.gridx = 1;
+		gc.insets = new Insets(0, 0, 0, 0);
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
+		add(taxField, gc);
+
+		/////// seventh row /////////////////
 		gc.gridy++;
 		gc.weightx = 1;
 		gc.weighty = 2.0;
