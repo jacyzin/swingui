@@ -38,7 +38,7 @@ public class MainFrame extends JFrame {
 				int ageCat = e.getAgeCat();
 				String empCat = e.getEmpCategory();
 				
-				textPanel.append(name + ": " + occupation + " : " + ageCat + " :" + empCat + "\n");
+				textPanel.append(name + ": " + occupation + " : " + ageCat + " :" + empCat + " : " + e.getGender() + "\n");
 			}
 		});
 		
